@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 // import OurJson from "./utility/OurJson";
 import styled from "styled-components";
-const MovieDetail = ({id}) => {
+const MovieDetail = ({ id }) => {
 	const [MovieInfo, setMovieInfo] = useState({});
 	useEffect(() => {
 		async function fetchData() {
-		// const request = await fetch(OurJson.MovieDetail);
-		const apikey = "71b5ec83";
-		const request = await fetch(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}`);			
-		const data = await request.json();
-		setMovieInfo(data);	
+			// const request = await fetch(OurJson.MovieDetail);
+			const apikey = "71b5ec83";
+			const request = await fetch(
+				`http://www.omdbapi.com/?i=${id}&apikey=${apikey}`
+			);
+			const data = await request.json();
+			setMovieInfo(data);
 		}
 		fetchData();
 	}, []);
@@ -19,58 +21,65 @@ const MovieDetail = ({id}) => {
 			<Poster>
 				<img src={MovieInfo.Poster} alt="" />
 			</Poster>
-			<Paragraph>
-				<h3>
-					<span>Title:</span>
-					{MovieInfo.Title}
-				</h3>
-				<h6>
-					<span>RunTime:</span> {MovieInfo.Runtime}
-				</h6>
-				<h6>
-					<span>Genre:</span> {MovieInfo.Genre}
-				</h6>
-				<h6 className="plot">
-                    <span>Plot:</span>
-                    <p>{MovieInfo.Plot}</p>
-				</h6>
-				<h5>
-					<span>Actors:</span> {MovieInfo.Actors}
-				</h5>
-				<h6>
-					<span>Rated:</span> {MovieInfo.Rated}
-				</h6>
-			</Paragraph>
+			<DetailInfo>
+				<Duration>
+					<Rating>
+						<span>
+							{MovieInfo.Rated}
+						</span>
+					</Rating>
+					<Rating>
+						<span>
+							{MovieInfo.Runtime}
+						</span>
+					</Rating>
+				</Duration>
+				<Rating>
+					<span>
+						{MovieInfo.Genre}
+					</span>
+				</Rating>
+				<Title>Plot</Title>
+				<TitleDetail>{MovieInfo.Plot}</TitleDetail>
+				<Title>Actors</Title>
+				<TitleDetail>{MovieInfo.Actors}</TitleDetail>
+			</DetailInfo>
 		</DetailWrapper>
 	);
 };
 
 const DetailWrapper = styled.div`
-margin-top: 50px;
-display: flex;
+	margin: 50px;
+	display: flex;
 `;
 const Poster = styled.div`
-    > img{
-        object-fit: contain;
-        width: 200px;
-        height: 200px;
-    }
+	> img {
+		object-fit: contain;
+		width: 200px;
+		height: 200px;
+	}
 `;
-const Paragraph = styled.div`
-	> h3 > span {
-		font-size: 1.5rem;
-	}
-	> h5 > span {
-		font-size: 1.5rem;
-	}
-	> h6 > span {
-		font-size: 1.5rem;
-	}
-    .plot{
-        align-items:center;
-        display: flex;
-    }
+const DetailInfo = styled.div``;
+const Duration = styled.div`
+	display: flex;
+	margin-bottom: 10px;
 `;
+const Rating = styled.div`
+	> span{
+	background-color: #4276c9;
+	border-radius: 5px;
+	margin-right:20px;
+	}
+	color: white;
+`;
+const Title = styled.div`
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin:5px 0 10px 0;
+`;
+const TitleDetail = styled.div`
+	font-style: italic;
+`;
+
 
 export default MovieDetail;
-

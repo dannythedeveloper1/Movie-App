@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MovieDetail from "./MovieDetail";
+import Button  from "@material-ui/core/Button";
 const MovieCard = ({ title, poster, id }) => {
 	// const [Movies, setMovies] = useState([]);
 	// const [id, setId] = useState("");
@@ -17,33 +18,43 @@ const MovieCard = ({ title, poster, id }) => {
 	// 	id ? setId("") : setId(movie.imdbID);
 	// 	console.log(id);
 	// }
-    function openDetail() {
-        setShow(true);
-    }
+	function openDetail() {
+		show == false ? setShow(true) : setShow(false);
+	}
 	return (
-		<>
-			<div>
-				<Movie>
-					<img className="image" src={poster} alt="" />
-					<h6>{title}</h6>
-				</Movie>
-				<button onClick={openDetail}>Open</button>
-                {show && <MovieDetail id={id}/>}
-			</div>
-			{/* <MovieDetail/> */}
-		</>
+		<MovieCards>
+			<PosterTitle>
+				<img src={poster} alt="" />
+				<h6>{title}</h6>
+			</PosterTitle>
+			<Btn>
+				<Button
+					variant="contained"
+					size="small"
+					color="primary"
+					onClick={openDetail}
+				>
+					Open
+				</Button>
+			</Btn>
+			{show && <MovieDetail id={id} />}
+		</MovieCards>
 	);
 };
 
-
-const Movie = styled.div`
-	cursor: pointer;
-	width: 75px;
-	.image {
-		object-fit: contain;
-		width: 100%;
-		height: 100px;
+const MovieCards = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+	padding-bottom: 10px;
+`;
+const PosterTitle = styled.div`
+	> img {
+		width:220px;
 	}
+`;
+const Btn = styled.div`
+	padding-top: 20px;
 `;
 
 export default MovieCard;

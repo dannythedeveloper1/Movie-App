@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
-import styled from 'styled-components'
 import OurJson from "./utility/OurJson";
 const MovieList = () => {
 	const [Movies, setMovies] = useState([]);
@@ -16,13 +15,13 @@ const MovieList = () => {
 		<div>
 			{Movies.map((movie) => {
 				return (
-					<Poster key={movie.imdbID}>
+					<div key={movie.imdbID}>
 						<MovieCard
 							poster={movie.Poster}
 							id={movie.imdbID}
 							title={movie.Title}
 						/>
-					</Poster>
+					</div>
 				);
 			})}
 		</div>
@@ -31,6 +30,3 @@ const MovieList = () => {
 
 export default MovieList;
 
-const Poster = styled.div`
-	display: flex;
-`;

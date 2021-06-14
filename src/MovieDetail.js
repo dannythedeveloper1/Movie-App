@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
-// import OurJson from "./utility/OurJson";
+import { fetchData } from "./utility/OurJson";
 import styled from "styled-components";
 const MovieDetail = ({ id }) => {
 	const [MovieInfo, setMovieInfo] = useState({});
 	useEffect(() => {
-		async function fetchData() {
-			// const request = await fetch(OurJson.MovieDetail);
-			const apikey = "71b5ec83";
-			const request = await fetch(
-				`http://www.omdbapi.com/?i=${id}&apikey=${apikey}`
-			);
-			const data = await request.json();
+		async function getData() {
+			const data = await fetchData(id);
 			setMovieInfo(data);
 		}
-		fetchData();
+		getData();
+		// async function fetchData() {
+		// 	// const request = await fetch(OurJson.MovieDetail);
+		// 	const apikey = "71b5ec83";
+		// 	const request = await fetch(
+		// 		`http://www.omdbapi.com/?i=${id}&apikey=${apikey}`
+		// 	);
+		// 	const data = await request.json();
+		// 	setMovieInfo(data);
+		// }
 	}, []);
+
 	console.log(MovieInfo);
 	return (
 		<DetailWrapper>
@@ -24,20 +29,14 @@ const MovieDetail = ({ id }) => {
 			<DetailInfo>
 				<Duration>
 					<Rating>
-						<span>
-							{MovieInfo.Rated}
-						</span>
+						<span>{MovieInfo.Rated}</span>
 					</Rating>
 					<Rating>
-						<span>
-							{MovieInfo.Runtime}
-						</span>
+						<span>{MovieInfo.Runtime}</span>
 					</Rating>
 				</Duration>
 				<Rating>
-					<span>
-						{MovieInfo.Genre}
-					</span>
+					<span>{MovieInfo.Genre}</span>
 				</Rating>
 				<Title>Plot</Title>
 				<TitleDetail>{MovieInfo.Plot}</TitleDetail>
@@ -65,21 +64,20 @@ const Duration = styled.div`
 	margin-bottom: 10px;
 `;
 const Rating = styled.div`
-	> span{
-	background-color: #4276c9;
-	border-radius: 5px;
-	margin-right:20px;
+	> span {
+		background-color: #4276c9;
+		border-radius: 5px;
+		margin-right: 20px;
 	}
 	color: white;
 `;
 const Title = styled.div`
 	font-size: 1.5rem;
 	font-weight: 700;
-	margin:5px 0 10px 0;
+	margin: 5px 0 10px 0;
 `;
 const TitleDetail = styled.div`
 	font-style: italic;
 `;
-
 
 export default MovieDetail;

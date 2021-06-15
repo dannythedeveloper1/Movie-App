@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "./utility/OurJson";
 import styled from "styled-components";
-const MovieDetail = ({ id }) => {
+const MovieDetail = ({id}) => {
 	const [MovieInfo, setMovieInfo] = useState({});
 	useEffect(() => {
 		async function getData() {

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
-import OurJson from "./utility/OurJson";
+import { OurJson } from "./utility/OurJson";
 const MovieList = () => {
 	const [Movies, setMovies] = useState([]);
 	useEffect(() => {
+		// async function fetchData() {
+		// 	const file = await fetch(OurJson.MovieFetch);
+		// 	const data = await file.json();
+		// 	setMovies(data.Search);
+		// }
+		// fetchData();
 		async function fetchData() {
-			const file = await fetch(OurJson.MovieFetch);
-			const data = await file.json();
-			setMovies(data.Search);
+			const data = await OurJson();
+			setMovies(data);
 		}
 		fetchData();
 	}, []);
@@ -29,4 +34,3 @@ const MovieList = () => {
 };
 
 export default MovieList;
-

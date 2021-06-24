@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import { OurJson } from "./utility/OurJson";
-const MovieList = () => {
+const MovieList = ({ userInput }) => {
 	const [Movies, setMovies] = useState([]);
 	useEffect(() => {
 		// async function fetchData() {
@@ -11,11 +11,11 @@ const MovieList = () => {
 		// }
 		// fetchData();
 		async function fetchData() {
-			const data = await OurJson();
+			const data = await OurJson(userInput);
 			setMovies(data);
 		}
 		fetchData();
-	}, []);
+	}, [userInput]);
 	return (
 		<div>
 			{Movies.map((movie) => {

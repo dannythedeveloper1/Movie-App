@@ -1,5 +1,5 @@
 const apikey = process.env.REACT_APP_API_KEY;
-const harryPotter = "harry%20potter";
+// const userInput = "harry%20potter";
 // const id = "tt1201607";
 // const OurJson = {
 // 	// i=imdbID
@@ -7,9 +7,9 @@ const harryPotter = "harry%20potter";
 // 	// MovieDetail: `http://www.omdbapi.com/?i=${id}&apikey=${apikey}`,
 // };
 // export default OurJson;
-export async function OurJson() {
+export async function OurJson(userInput) {
 	const request = await fetch(
-		`http://www.omdbapi.com/?s=${harryPotter}&apikey=${apikey}`
+		`http://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`
 	);
 	const data = await request.json();
 	return data.Search;

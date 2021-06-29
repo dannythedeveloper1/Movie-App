@@ -7,12 +7,21 @@ const apikey = process.env.REACT_APP_API_KEY;
 // 	// MovieDetail: `http://www.omdbapi.com/?i=${id}&apikey=${apikey}`,
 // };
 // export default OurJson;
-export async function OurJson(userInput) {
+
+export async function OurJson(userInput,type) {
 	const request = await fetch(
 		`http://www.omdbapi.com/?s=${userInput}&apikey=${apikey}`
 	);
 	const data = await request.json();
-	return data.Search;
+	const file = data.Search;
+	let movies = [];
+	file.forEach(element => {
+		if (element.Type === type) {
+			movies.push(element);
+		}
+	});
+	console.log(movies);
+	return movies;
 }
 
 export async function fetchData(id) {
@@ -25,9 +34,3 @@ export async function fetchData(id) {
 	return data;
 }
 
-// function add(a, b) {
-// 	sum = a + b;
-// 	return sum;
-// }
-
-// add(1, 2);
